@@ -1,0 +1,9 @@
+{
+  "name": "djexo-pvp-discord-bot",
+  "version": "2.0.0",
+  "description": "Fresh Discord.js bot for Djexo PvP MTA SA community",
+  "main": "src/index.js",
+  "scripts": {"deploy": "node src/deploy.js", "start": "node src/index.js"},
+  "engines": {"node": ">=20.0.0"},
+  "dependencies": {"discord.js": "^14.22.1", "dotenv": "^16.6.1", "gamedig": "^5.3.1"}
+}
