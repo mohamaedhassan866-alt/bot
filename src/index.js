@@ -13,11 +13,14 @@ const ticketPanelImagePath = path.join(__dirname, '..', 'assets', 'ticket-banner
 const statusMessageFile = path.join(__dirname, '..', 'data', 'status-message.json');
 function readStatusMessageId() { try { return JSON.parse(fs.readFileSync(statusMessageFile, 'utf8')).messageId || null; } catch { return null; } }
 function saveStatusMessageId(messageId) { fs.mkdirSync(path.dirname(statusMessageFile), { recursive: true }); fs.writeFileSync(statusMessageFile, JSON.stringify({ messageId }, null, 2)); }
-
-if (!cfg.token || !cfg.clientId || !cfg.guildId) {
-  console.error('الإعدادات ناقصة: انسخ .env.example إلى .env واملأ DISCORD_TOKEN وCLIENT_ID وGUILD_ID.');
-  process.exit(1);
-}
+console.log('[ENV CHECK]', {
+  DISCORD_TOKEN: Boolean(process.env.DISCORD_TOKEN?.trim()),
+  CLIENT_ID: Boolean(process.env.CLIENT_ID?.trim()),
+  GUILD_ID: Boolean(process.env.GUILD_ID?.trim()),
+  configToken: Boolean(cfg.token),
+  configClientId: Boolean(cfg.clientId),
+  configGuildId: Boolean(cfg.guildId)
+});
 
 // Only the Guilds intent is needed for slash commands, interactions, and ticket channels.
 const client = new Client({
